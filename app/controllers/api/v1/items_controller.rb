@@ -5,6 +5,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
+    binding.pry
     render json: ItemSerializer.new(Item.find(params['id']))
   end
 
@@ -24,6 +25,6 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description)
+    params.require(:item).permit(:name, :description, :merchant_id)
   end
 end
