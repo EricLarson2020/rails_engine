@@ -12,12 +12,14 @@ describe "Item Merchant API request" do
     item5 = create(:item, merchant_id: merchant2.id)
     item6 = create(:item, merchant_id: merchant2.id)
 
-    get "/api/v1/items/#{item1.id}/merchants"
+    get "/api/v1/items/#{item1.id}/merchant"
     expect(response).to be_successful
 
     parsed_json = JSON.parse(response.body, symbolize_name: true)
-    
-    expect(parsed_json['data'].count).to eq(1)
+
+    expect(parsed_json['data']['id'].to_i).to eq(merchant1.id)
+
+
 
 
   end

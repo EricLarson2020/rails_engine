@@ -12,7 +12,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     items = JSON.parse(response.body)
-
+    
     expect(items['data'].count).to eql(3)
   end
 
