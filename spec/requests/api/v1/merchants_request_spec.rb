@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Merchants API" do
   it "sends a list of merchants" do
-    
+
     merchants_list = create_list(:merchant, 3)
 
 
@@ -27,7 +27,7 @@ describe "Merchants API" do
   it "can create a new merchant" do
     merchant_params = { name: "Saw"}
 
-    post '/api/v1/merchants', params: {merchant: merchant_params}
+    post '/api/v1/merchants', params: merchant_params
     merchant = Merchant.last
 
     expect(response).to be_successful
@@ -39,7 +39,7 @@ describe "Merchants API" do
     previous_name = Merchant.last.name
     merchant_params = { name: "Sledge" }
 
-    put "/api/v1/merchants/#{id}", params: {merchant: merchant_params}
+    put "/api/v1/merchants/#{id}", params: merchant_params
     merchant = Merchant.find_by(id: id)
 
     expect(response).to be_successful
