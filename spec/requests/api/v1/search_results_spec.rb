@@ -10,9 +10,9 @@ require "rails_helper"
       create(:merchant, name: "Blue Twoes", created_at: 'Tues, 04 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Tues, 04 Aug 2020 12:00:00 UTC +00:00')
       create(:merchant, name: "Blue Dog", created_at: 'Wed, 05 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Wed, 05 Aug 2020 12:00:00 UTC +00:00')
 
-      create(:item, name:'Dog Toy', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id)
-      create(:item, name:'Cat Toy', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id)
-      create(:item, name:'Bird Feed', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id)
+      create(:item, name:'Dog Toy', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id, unit_price: 2.99)
+      create(:item, name:'Cat Toy', created_at: 'Sun, 02 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sun, 02 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id, unit_price: 12.45)
+      create(:item, name:'Bird Feed', created_at: 'Mon, 03 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Mon, 03 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id, unit_price: 10.00)
     end
 
 
@@ -67,16 +67,30 @@ require "rails_helper"
 
     end
 
-    it "can search for all matching items for attribute" do
+    it "I can find an item based on a date" do
+        get "/api/v1/items/find?updated_at=3"
+        json = JSON.parse(response.body, symbolize_name: true)
+
+        expect(json['data']['attributes']['name']).to eq("Bird Feed")
 
     end
 
-    it "can search for all matching merchants for attribute" do
+    it "I can find all items with a given attribute" do
+        get "/api/v1/items/find_all?name=toy"
+        json = JSON.parse(response.body, symbolize_name: true)
 
+        expect(json['data'].first['attributes']['name']).to eq('Dog Toy')
+        expect(json['data'].last['attributes']['name']).to eq('Cat Toy')
+        expect(json['data'].count).to eq(2)
     end
 
-    it "can search using a date for all attributes" do
+    it "it can search multiple attributes" do
+        get "/api/v1/items/find_all?name=cat&unit_price=99"
+        json = JSON.parse(response.body, symbolize_name: true)
 
+        expect(json['data'].first['attributes']['name']).to eq('Cat Toy')
+        expect(json['data'].last['attributes']['name']).to eq('Dog Toy')
+        expect(json['data'].count).to eq(2)
     end
 
 end

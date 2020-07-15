@@ -3,11 +3,11 @@ class Merchant < ApplicationRecord
 
   has_many :invoices
 
-  has_many
+
 
 
     def self.find_one(name = nil, created_at = nil, updated_at = nil)
-
+      
       find_all(name, created_at, updated_at).first
 
     end
