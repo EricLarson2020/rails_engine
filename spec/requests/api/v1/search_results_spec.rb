@@ -4,12 +4,18 @@ require "rails_helper"
   describe "Items and Merchants search results" do
 
     before :each do
-      create(:merchant, name: 'ReI Recreation', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00')
+    merchant =   create(:merchant, name: 'ReI Recreation', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00')
       create(:merchant, name: "The Fuzzies", created_at: 'Sun, 02 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sun, 02 Aug 2020 12:00:00 UTC +00:00')
       create(:merchant, name: "Sky diving R us", created_at: 'Mon, 03 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Mon, 03 Aug 2020 12:00:00 UTC +00:00')
       create(:merchant, name: "Blue Twoes", created_at: 'Tues, 04 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Tues, 04 Aug 2020 12:00:00 UTC +00:00')
       create(:merchant, name: "Blue Dog", created_at: 'Wed, 05 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Wed, 05 Aug 2020 12:00:00 UTC +00:00')
+
+      create(:item, name:'Dog Toy', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id)
+      create(:item, name:'Cat Toy', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id)
+      create(:item, name:'Bird Feed', created_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', updated_at: 'Sat, 01 Aug 2020 12:00:00 UTC +00:00', merchant_id: merchant.id)
     end
+
+
 
     it "can search for single matching merchant attribute with caps and only part of name" do
 
@@ -49,11 +55,15 @@ require "rails_helper"
       get "/api/v1/merchants/find_all?name=blue"
       json = JSON.parse(response.body, symbolize_name: true)
 
-      expect(json['data'].first['attributes']['name'].to eq('Blue Twoes'))
-      expect(json['data'].last['attributes']['name'].to eq('Blue Dog'))
+      expect(json['data'].first['attributes']['name']).to eq('Blue Twoes')
+      expect(json['data'].last['attributes']['name']).to eq('Blue Dog')
     end
 
-    it "can search for item date" do
+    it "it can find an item based on its attribute" do
+      get "/api/v1/items/find?name=dog"
+      json = JSON.parse(response.body, symbolize_name: true)
+
+      expect(json['data']['attributes']['name']).to eq("Dog Toy")
 
     end
 
@@ -69,4 +79,4 @@ require "rails_helper"
 
     end
 
-  end
+end
