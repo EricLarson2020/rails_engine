@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :invoice do
-    status { 'shipped' }
-    merchant
-    customer
+    sequence(:id) { |n| n }
+    status { "shipped" }
   end
 end

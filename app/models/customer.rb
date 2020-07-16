@@ -1,7 +1,7 @@
 require '/Users/ericlarson/turing/3module/rails_driver/app/models/application_record.rb'
 
 class Customer < ApplicationRecord
-
+  has_many :invoices, dependent: :destroy
 end
 
 
