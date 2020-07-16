@@ -22,15 +22,15 @@ class Merchant < ApplicationRecord
 
     def self.most_revenue(params)
 
-      answer = Merchant.select("merchants.name, SUM(invoice_items.quantity * invoice_items.unit_price) AS total")
+      Merchant.select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
       .joins(invoices: [:invoice_items, :transactions])
       .where(transactions: {result: "success"})
-      .group('merchants.name')
+      .group(:id)
       .order("SUM(invoice_items.quantity * invoice_items.unit_price) DESC")
       .limit(params)
-    
-
     end
+
+
 
     scope :given_name, ->(name) {where( 'name ILIKE ?', "%" + "#{name}" + "%") if name}
 
