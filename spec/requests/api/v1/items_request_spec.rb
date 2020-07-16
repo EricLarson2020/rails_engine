@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe "Items API" do
   it "sends a list of items" do
-    items_list = create_list(:item, 3)
+    merchant = create(:merchant)
+    items_list = create_list(:item, 3, merchant_id: merchant.id)
 
 
     get '/api/v1/items'
@@ -16,7 +17,8 @@ describe "Items API" do
   end
 
   it "can get one item by its id" do
-    id = create(:item).id
+    merchant = create(:merchant)
+    id = create(:item, merchant_id: merchant.id).id
 
     get "/api/v1/items/#{id}"
 
@@ -26,9 +28,12 @@ describe "Items API" do
   end
 
   it "can create a new item" do
-    item_params = { name: "Saw", description: "I want to play a game"}
+    merchant = create(:merchant)
 
-    post '/api/v1/items', params: {item: item_params}
+
+    item_params = { name: "Saw", description: "I want to play a game", merchant_id: merchant.id, unit_price: 5011.96 }
+
+    post '/api/v1/items', params: item_params
     item = Item.last
 
     expect(response).to be_successful
@@ -36,11 +41,12 @@ describe "Items API" do
   end
 
   it "can update an existing item" do
-    id = create(:item).id
+    merchant = create(:merchant)
+    id = create(:item, merchant_id: merchant.id).id
     previous_name = Item.last.name
     item_params = { name: "Sledge" }
 
-    put "/api/v1/items/#{id}", params: {item: item_params}
+    put "/api/v1/items/#{id}", params: item_params
     item = Item.find_by(id: id)
 
     expect(response).to be_successful
@@ -49,7 +55,8 @@ describe "Items API" do
   end
 
   it "can destory an item" do
-    item = create(:item)
+    merchant = create(:merchant)
+    item = create(:item, merchant_id: merchant.id)
 
     expect(Item.count).to eq(1)
 

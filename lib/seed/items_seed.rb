@@ -11,7 +11,7 @@ class ItemsSeed
       number += 1
 
       price = (entry['unit_price']).to_s.insert(-3, '.').to_f
-  
+
       new_item = Item.create({
         name: entry['name'],
         description: entry['description'],
@@ -25,6 +25,7 @@ class ItemsSeed
 
     end
   end
+
 
 
 
