@@ -40,9 +40,8 @@ describe 'Business API Endpoints' do
 
     binding.pry
 
-    
+    expect(json['data'].first['attributes']['name']).to eq("Merchant 2")
+    expect(json['data'].last['attributes']['name'].to eq("Merchant 3"))
 
-    #3 highest
-    #1 next
   end
 end
