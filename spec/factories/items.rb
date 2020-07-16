@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :item do
-    sequence(:name) { |n| "Item #{n}" }
-    sequence(:description) { |n| "Food #{n}"}
-    sequence(:unit_price) {|n| n + 0.50 }
-
+    sequence(:id) {|n| n }
+     sequence(:name) {|n| "Item name #{n}" }
+     sequence(:description) {|n| "Item description #{n}" }
+     sequence(:unit_price) {|n| n + 0.95 }
   end
 end
 

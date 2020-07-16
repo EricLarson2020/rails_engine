@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
-  has_many :items, dependent: :destroy
+    has_many :items, dependent: :destroy
     has_many :invoices, dependent: :destroy
+
 
 
 
@@ -28,8 +29,39 @@ class Merchant < ApplicationRecord
       .group(:id)
       .order("SUM(invoice_items.quantity * invoice_items.unit_price) DESC")
       .limit(params)
+
     end
 
+    def self.most_items(params)
+
+      answer = Merchant.select("merchants.*, SUM(invoice_items.quantity) as items_sold")
+        .joins(invoices: [:invoice_items, :transactions])
+        .where(transactions: {result: "success"})
+        .group(:id)
+        .order("SUM(invoice_items.quantity) DESC")
+        .limit(params)
+    end
+
+    def self.revenue_between_dates(start_date, end_date)
+
+    starting_date = Date.parse(start_date).beginning_of_day
+    ending_date = Date.parse(end_date).end_of_day
+
+   total_rev = Invoice.select("SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+                      .joins(:invoice_items, :transactions)
+                      .where(transactions: {result: 'success'})
+                      .where('date(invoices.created_at) BETWEEN ? AND ?', starting_date, ending_date)
+
+    end
+
+
+
+
+   # answer =   InvoiceItem.select("SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+   # .joins(invoices: [:transactions])
+   # .where(transactions: {result: 'success'})
+   # .where('invoices.created_at BETWEEN ? AND ?', "#{params[:start].to_date.beginning_of_day}", "#{params[:end].to_date.end_of_day}")
+   # binding.pry
 
 
     scope :given_name, ->(name) {where( 'name ILIKE ?', "%" + "#{name}" + "%") if name}

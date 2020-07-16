@@ -209,7 +209,8 @@
           1,
           1,
           2,
-          2,
+          null,
+          null,
           null,
           null
         ]
@@ -218,9 +219,9 @@
         "lines": [
           1,
           1,
+          10,
           1,
-          7,
-          null,
+          1,
           null,
           null
         ]
@@ -229,8 +230,8 @@
         "lines": [
           1,
           1,
-          7,
-          null,
+          10,
+          10,
           null,
           null
         ]
@@ -239,10 +240,10 @@
         "lines": [
           1,
           1,
-          24,
-          51,
-          24,
-          null,
+          49,
+          22,
+          49,
+          22,
           null,
           null,
           null,
@@ -259,6 +260,7 @@
         "lines": [
           1,
           1,
+          64,
           19,
           null,
           null
@@ -268,10 +270,10 @@
         "lines": [
           1,
           1,
-          6,
-          null,
-          6,
-          null,
+          10,
+          10,
+          10,
+          1,
           null,
           null
         ]
@@ -281,6 +283,8 @@
           1,
           null,
           null,
+          1,
+          1,
           1,
           1,
           1,
@@ -599,11 +603,30 @@
           null
         ]
       },
+      "/Users/ericlarson/turing/3module/classwork/rails_engine/app/models/customer.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/ericlarson/turing/3module/classwork/rails_engine/app/models/merchant.rb": {
         "lines": [
           1,
           1,
           1,
+          null,
           null,
           null,
           null,
@@ -634,37 +657,43 @@
           null,
           null,
           null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           5,
           null,
           1,
           null,
           3,
-          null,
-          null
-        ]
-      },
-      "/Users/ericlarson/turing/3module/classwork/rails_engine/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/ericlarson/turing/3module/classwork/rails_engine/app/models/customer.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null
         ]
@@ -751,7 +780,6 @@
           1,
           null,
           1,
-          null,
           1,
           null,
           null,
@@ -769,6 +797,41 @@
           1,
           1,
           1,
+          null
+        ]
+      },
+      "/Users/ericlarson/turing/3module/classwork/rails_engine/app/controllers/api/v1/merchant/most_items_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ericlarson/turing/3module/classwork/rails_engine/app/controllers/api/v1/merchant/revenue_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ericlarson/turing/3module/classwork/rails_engine/app/serializers/revenue_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
@@ -831,10 +894,8 @@
           null,
           null,
           1,
-          null,
           1,
           1,
-          null,
           null,
           null,
           null
@@ -909,6 +970,6 @@
         ]
       }
     },
-    "timestamp": 1594864508
+    "timestamp": 1594880758
   }
 }
